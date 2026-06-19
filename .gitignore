@@ -1,8 +1,10 @@
-cd ~/Documents/StadiumApp/StadiumMap/backend
-echo "venv/" > .gitignore
-echo "__pycache__/" >> .gitignore
-echo "*.pyc" >> .gitignore
 node_modules/
 venv/
+backend/venv/
 __pycache__/
 *.pyc
+.DS_Store
+*.env
+build/
+StadiumMap/build/
+StadiumMap/node_modules/
