@@ -13,6 +13,8 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import StadiumModal from "../components/stadiums/StadiumModal";
 import { useStadiumCRUD } from "../hooks/useStadiums";
 import { STADIUMS } from "../data/stadiums";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const COUNTRY_FLAGS = { USA: "🇺🇸", México: "🇲🇽", Canadá: "🇨🇦" };
 
@@ -24,6 +26,8 @@ export default function AdminPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editTarget, setEditTarget] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const filtered = stadiums.filter(
     (s) =>
@@ -90,89 +94,170 @@ export default function AdminPage() {
       />
 
       {/* Table */}
-      <TableContainer
-        component={Paper}
-        elevation={0}
-        sx={{ bgcolor: "rgba(15,48,82,0.7)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 3 }}
-      >
-        <Table size="small">
-          <TableHead>
-            <TableRow sx={{ "& th": { color: "rgba(255,255,255,0.4)", fontSize: 12, fontWeight: 600, py: 1.5, borderBottom: "1px solid rgba(255,255,255,0.08)" } }}>
-              <TableCell>Estadio</TableCell>
-              <TableCell>Ciudad</TableCell>
-              <TableCell>País</TableCell>
-              <TableCell align="right">Capacidad</TableCell>
-              <TableCell align="right">Año</TableCell>
-              <TableCell align="right">Partidos</TableCell>
-              <TableCell align="center">Acciones</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filtered.map((s) => (
-              <TableRow
-                key={s.id}
-                sx={{
-                  "&:hover": { bgcolor: "rgba(255,255,255,0.03)" },
-                  "& td": { borderBottom: "1px solid rgba(255,255,255,0.05)", py: 1.2 },
-                }}
-              >
-                <TableCell>
-                  <Typography variant="body2" color="#fff" fontWeight={500}>
-                    {s.name}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2" color="rgba(255,255,255,0.6)">{s.city}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    label={`${COUNTRY_FLAGS[s.country] || ""} ${s.country}`}
-                    size="small"
-                    sx={{ bgcolor: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.7)", fontSize: 11 }}
-                  />
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant="body2" color="rgba(255,255,255,0.6)">
-                    {s.capacity.toLocaleString()}
-                  </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant="body2" color="rgba(255,255,255,0.6)">{s.year}</Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Chip
-                    label={s.matches}
-                    size="small"
-                    sx={{ bgcolor: "rgba(212,175,55,0.15)", color: "#D4AF37", fontSize: 11 }}
-                  />
-                </TableCell>
-                <TableCell align="center">
-                  <Box sx={{ display: "flex", gap: 0.5, justifyContent: "center" }}>
-                    <Tooltip title="Ver detalle">
-                      <IconButton size="small" onClick={() => navigate(`/estadios/${s.id}`)}
-                        sx={{ color: "rgba(255,255,255,0.4)", "&:hover": { color: "#fff" } }}>
-                        <OpenInNewIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Editar">
-                      <IconButton size="small" onClick={() => openEdit(s)}
-                        sx={{ color: "rgba(0,174,239,0.7)", "&:hover": { color: "#00AEEF" } }}>
-                        <EditIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Eliminar">
-                      <IconButton size="small" onClick={() => setDeleteTarget(s)}
-                        sx={{ color: "rgba(244,67,54,0.6)", "&:hover": { color: "#f44336" } }}>
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
-                </TableCell>
+      {/* LISTA RESPONSIVA */}
+      {isMobile ? (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {filtered.map((s) => (
+            <Paper
+              key={s.id}
+              sx={{
+                bgcolor: "rgba(15,48,82,0.7)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 3,
+                p: 2,
+              }}
+            >
+              <Typography fontWeight={700} color="#fff">
+                {s.name}
+              </Typography>
+
+              <Typography variant="body2" color="rgba(255,255,255,0.6)">
+                {s.city} · {s.country}
+              </Typography>
+
+              <Typography variant="body2" color="rgba(255,255,255,0.5)" mt={1}>
+                Capacidad: {s.capacity.toLocaleString()}
+              </Typography>
+
+              <Typography variant="body2" color="rgba(255,255,255,0.5)">
+                Año: {s.year}
+              </Typography>
+
+              <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+                <IconButton onClick={() => navigate(`/estadios/${s.id}`)}>
+                  <OpenInNewIcon fontSize="small" />
+                </IconButton>
+
+                <IconButton onClick={() => openEdit(s)}>
+                  <EditIcon fontSize="small" />
+                </IconButton>
+
+                <IconButton onClick={() => setDeleteTarget(s)}>
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </Box>
+            </Paper>
+          ))}
+        </Box>
+      ) : (
+        <TableContainer
+          component={Paper}
+          elevation={0}
+          sx={{
+            bgcolor: "rgba(15,48,82,0.7)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: 3,
+          }}
+        >
+          <Table size="small">
+            <TableHead>
+              <TableRow sx={{ "& th": { color: "rgba(255,255,255,0.4)", fontSize: 12, fontWeight: 600, py: 1.5, borderBottom: "1px solid rgba(255,255,255,0.08)" } }}>
+                <TableCell>Estadio</TableCell>
+                <TableCell>Ciudad</TableCell>
+                <TableCell>País</TableCell>
+                <TableCell align="right">Capacidad</TableCell>
+                <TableCell align="right">Año</TableCell>
+                <TableCell align="right">Partidos</TableCell>
+                <TableCell align="center">Acciones</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+
+            <TableBody>
+              {filtered.map((s) => (
+                <TableRow
+                  key={s.id}
+                  sx={{
+                    "&:hover": { bgcolor: "rgba(255,255,255,0.03)" },
+                    "& td": { borderBottom: "1px solid rgba(255,255,255,0.05)", py: 1.2 },
+                  }}
+                >
+                  <TableCell>
+                    <Typography variant="body2" color="#fff" fontWeight={500}>
+                      {s.name}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell>
+                    <Typography variant="body2" color="rgba(255,255,255,0.6)">
+                      {s.city}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell>
+                    <Chip
+                      label={`${COUNTRY_FLAGS[s.country] || ""} ${s.country}`}
+                      size="small"
+                      sx={{
+                        bgcolor: "rgba(255,255,255,0.06)",
+                        color: "rgba(255,255,255,0.7)",
+                        fontSize: 11,
+                      }}
+                    />
+                  </TableCell>
+
+                  <TableCell align="right">
+                    <Typography variant="body2" color="rgba(255,255,255,0.6)">
+                      {s.capacity.toLocaleString()}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell align="right">
+                    <Typography variant="body2" color="rgba(255,255,255,0.6)">
+                      {s.year}
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell align="right">
+                    <Chip
+                      label={s.matches}
+                      size="small"
+                      sx={{
+                        bgcolor: "rgba(212,175,55,0.15)",
+                        color: "#D4AF37",
+                        fontSize: 11,
+                      }}
+                    />
+                  </TableCell>
+
+                  <TableCell align="center">
+                    <Box sx={{ display: "flex", gap: 0.5, justifyContent: "center" }}>
+                      <Tooltip title="Ver detalle">
+                        <IconButton
+                          size="small"
+                          onClick={() => navigate(`/estadios/${s.id}`)}
+                          sx={{ color: "rgba(255,255,255,0.4)", "&:hover": { color: "#fff" } }}
+                        >
+                          <OpenInNewIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+
+                      <Tooltip title="Editar">
+                        <IconButton
+                          size="small"
+                          onClick={() => openEdit(s)}
+                          sx={{ color: "rgba(0,174,239,0.7)", "&:hover": { color: "#00AEEF" } }}
+                        >
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+
+                      <Tooltip title="Eliminar">
+                        <IconButton
+                          size="small"
+                          onClick={() => setDeleteTarget(s)}
+                          sx={{ color: "rgba(244,67,54,0.6)", "&:hover": { color: "#f44336" } }}
+                        >
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
       {filtered.length === 0 && (
         <Typography color="rgba(255,255,255,0.4)" textAlign="center" py={4}>
