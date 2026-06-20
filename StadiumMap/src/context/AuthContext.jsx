@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Inicializar usuarios en localStorage si no existen
+  // Si no existen usuarios, inicializar en localStorage
   useEffect(() => {
     if (!localStorage.getItem(USERS_KEY)) {
       localStorage.setItem(USERS_KEY, JSON.stringify(DEFAULT_USERS));
