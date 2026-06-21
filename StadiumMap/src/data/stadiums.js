@@ -208,19 +208,89 @@ export const STADIUMS = [
     lng: -79.4189,
   },
 ];
-
 export const MATCHES = [
-  { id: 1, home: "México", away: "Irlanda", date: "2026-06-11", time: "18:00", stadiumId: 12, phase: "Grupo A" },
-  { id: 2, home: "USA", away: "Brasil", date: "2026-06-12", time: "21:00", stadiumId: 1, phase: "Grupo B" },
-  { id: 3, home: "Argentina", away: "Canadá", date: "2026-06-13", time: "16:00", stadiumId: 16, phase: "Grupo C" },
-  { id: 4, home: "Alemania", away: "Japón", date: "2026-06-14", time: "19:00", stadiumId: 4, phase: "Grupo D" },
-  { id: 5, home: "Francia", away: "Australia", date: "2026-06-15", time: "20:00", stadiumId: 2, phase: "Grupo E" },
-  { id: 6, home: "España", away: "Corea del Sur", date: "2026-06-16", time: "17:00", stadiumId: 5, phase: "Grupo F" },
-  { id: 7, home: "Inglaterra", away: "Senegal", date: "2026-06-17", time: "18:00", stadiumId: 7, phase: "Grupo G" },
-  { id: 8, home: "Portugal", away: "Ghana", date: "2026-06-18", time: "21:00", stadiumId: 3, phase: "Grupo H" },
-  { id: 9, home: "Países Bajos", away: "Ecuador", date: "2026-06-19", time: "16:00", stadiumId: 8, phase: "Grupo A" },
+  {
+    id: 1,
+    home: "México",
+    away: "Sudáfrica",
+    date: "2026-06-11",
+    time: "19:00",
+    stadiumId: 12,
+    phase: "Grupo A"
+  },
+  {
+    id: 2,
+    home: "Corea del Sur",
+    away: "Chequia",
+    date: "2026-06-11",
+    time: "22:00",
+    stadiumId: 14,
+    phase: "Grupo A"
+  },
+  {
+    id: 3,
+    home: "Canadá",
+    away: "Bosnia y Herzegovina",
+    date: "2026-06-12",
+    time: "16:00",
+    stadiumId: 15,
+    phase: "Grupo B"
+  },
+  {
+    id: 4,
+    home: "Estados Unidos",
+    away: "Paraguay",
+    date: "2026-06-12",
+    time: "21:00",
+    stadiumId: 4,
+    phase: "Grupo D"
+  },
+  {
+    id: 5,
+    home: "Qatar",
+    away: "Suiza",
+    date: "2026-06-13",
+    time: "16:00",
+    stadiumId: 16,
+    phase: "Grupo B"
+  },
+  {
+    id: 6,
+    home: "Brasil",
+    away: "Marruecos",
+    date: "2026-06-13",
+    time: "19:00",
+    stadiumId: 2,
+    phase: "Grupo C"
+  },
+  {
+    id: 7,
+    home: "Francia",
+    away: "Senegal",
+    date: "2026-06-16",
+    time: "17:00",
+    stadiumId: 1,
+    phase: "Grupo I"
+  },
+  {
+    id: 8,
+    home: "Argentina",
+    away: "Austria",
+    date: "2026-06-16",
+    time: "22:00",
+    stadiumId: 3,
+    phase: "Grupo J"
+  },
+  {
+    id: 9,
+    home: "Inglaterra",
+    away: "Croacia",
+    date: "2026-06-17",
+    time: "18:00",
+    stadiumId: 7,
+    phase: "Grupo L"
+  }
 ];
-
 export const FLAGS = {
   México: "🇲🇽", USA: "🇺🇸", Brasil: "🇧🇷", Argentina: "🇦🇷",
   Canadá: "🇨🇦", Alemania: "🇩🇪", Japón: "🇯🇵", Francia: "🇫🇷",
