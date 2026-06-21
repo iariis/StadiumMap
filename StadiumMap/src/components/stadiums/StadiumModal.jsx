@@ -4,11 +4,34 @@ import {
   TextField, Button, Box, MenuItem, Typography, IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { FLAGS } from "../../data/stadiums";
 
 const COUNTRIES = ["USA", "México", "Canadá"];
 const SURFACES = ["Césped natural", "Césped sintético"];
 
 const EMPTY = { name: "", city: "", country: "USA", capacity: "", year: "", matches: "", surface: "Césped natural", description: "" };
+
+function CountryLabel({ country, size = 20 }) {
+  return (
+    <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.8 }}>
+      {FLAGS[country] && (
+        <Box
+          component="img"
+          src={FLAGS[country]}
+          alt={country}
+          sx={{
+            width: size,
+            height: Math.round(size * 0.68),
+            objectFit: "cover",
+            borderRadius: "2px",
+            boxShadow: "0 0 0 1px rgba(255,255,255,0.22)",
+          }}
+        />
+      )}
+      <span>{country}</span>
+    </Box>
+  );
+}
 
 export default function StadiumModal({ open, onClose, onSave, initial }) {
   const [form, setForm] = useState(EMPTY);
@@ -68,8 +91,13 @@ export default function StadiumModal({ open, onClose, onSave, initial }) {
           <TextField name="city" label="Ciudad" value={form.city} onChange={handleChange}
             error={!!errors.city} helperText={errors.city} fullWidth sx={sx} />
           <TextField name="country" label="País" value={form.country} onChange={handleChange}
-            select fullWidth sx={sx}>
-            {COUNTRIES.map((c) => <MenuItem key={c} value={c}>{c}</MenuItem>)}
+            select fullWidth sx={sx}
+            SelectProps={{ renderValue: (value) => <CountryLabel country={value} /> }}>
+            {COUNTRIES.map((c) => (
+              <MenuItem key={c} value={c}>
+                <CountryLabel country={c} />
+              </MenuItem>
+            ))}
           </TextField>
         </Box>
         <Box sx={{ display: "flex", gap: 2 }}>

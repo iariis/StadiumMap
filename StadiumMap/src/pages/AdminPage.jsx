@@ -12,11 +12,31 @@ import SearchIcon from "@mui/icons-material/Search";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import StadiumModal from "../components/stadiums/StadiumModal";
 import { useStadiumCRUD } from "../hooks/useStadiums";
-import { STADIUMS } from "../data/stadiums";
+import { FLAGS, STADIUMS } from "../data/stadiums";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const COUNTRY_FLAGS = { USA: "🇺🇸", México: "🇲🇽", Canadá: "🇨🇦" };
+function CountryLabel({ country, size = 20 }) {
+  return (
+    <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.7 }}>
+      {FLAGS[country] && (
+        <Box
+          component="img"
+          src={FLAGS[country]}
+          alt={country}
+          sx={{
+            width: size,
+            height: Math.round(size * 0.68),
+            objectFit: "cover",
+            borderRadius: "2px",
+            boxShadow: "0 0 0 1px rgba(255,255,255,0.22)",
+          }}
+        />
+      )}
+      <span>{country}</span>
+    </Box>
+  );
+}
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -111,8 +131,8 @@ export default function AdminPage() {
                 {s.name}
               </Typography>
 
-              <Typography variant="body2" color="rgba(255,255,255,0.6)">
-                {s.city} · {s.country}
+              <Typography variant="body2" color="rgba(255,255,255,0.6)" component="div">
+                {s.city} · <CountryLabel country={s.country} size={18} />
               </Typography>
 
               <Typography variant="body2" color="rgba(255,255,255,0.5)" mt={1}>
@@ -185,7 +205,7 @@ export default function AdminPage() {
 
                   <TableCell>
                     <Chip
-                      label={`${COUNTRY_FLAGS[s.country] || ""} ${s.country}`}
+                      label={<CountryLabel country={s.country} />}
                       size="small"
                       sx={{
                         bgcolor: "rgba(255,255,255,0.06)",

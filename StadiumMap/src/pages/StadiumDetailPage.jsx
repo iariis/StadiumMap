@@ -94,7 +94,7 @@ export default function StadiumDetailPage() {
       {/* Hero */}
       <Box
         sx={{
-          height: { xs: 160, md: 220 },
+          height: { xs: 260, md: 430 },
           borderRadius: 3,
           background: "linear-gradient(135deg, #0A2540 0%, #1a4a6c 50%, #0F3052 100%)",
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -102,7 +102,23 @@ export default function StadiumDetailPage() {
           border: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} />
+        {stadium.embed3d ? (
+          <Box
+            component="iframe"
+            title={`${stadium.name} 3D`}
+            src={stadium.embed3d}
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            allowFullScreen
+            sx={{
+              width: "100%",
+              height: "100%",
+              border: 0,
+              display: "block",
+            }}
+          />
+        ) : (
+          <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} />
+        )}
         <Box sx={{ position: "absolute", top: 16, left: 16 }}>
           <Chip
             label={
