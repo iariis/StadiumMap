@@ -11,7 +11,6 @@ import MapIcon from "@mui/icons-material/Map";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import { useAuth } from "../../context/AuthContext";
@@ -169,13 +168,7 @@ export default function Layout({ children }) {
             <Typography variant="h6" fontWeight={700} color="#fff" sx={{ flexGrow: 1, fontSize: 16 }}>
               StadiumMap 2026
             </Typography>
-            <Tooltip title="Notificaciones">
-              <IconButton sx={{ color: "rgba(255,255,255,0.6)" }}>
-                <Badge badgeContent={3} color="error">
-                  <NotificationsIcon fontSize="small" />
-                </Badge>
-              </IconButton>
-            </Tooltip>
+          
             <Tooltip title="Cerrar sesión">
               <IconButton onClick={logout} sx={{ color: "rgba(255,255,255,0.6)" }}>
                 <LogoutIcon fontSize="small" />
