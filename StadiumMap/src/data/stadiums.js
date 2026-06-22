@@ -1,20 +1,38 @@
+import metlifeImg from "../assets/images/Metlifestadium.jpg";
+import atImg from "../assets/images/ATStadium.jpg";
+import merImg from "../assets/images/Atlanta_stadium.jpg";
+import sofiImg from "../assets/images/sofiStadium.jpg";
+import houstenImg from "../assets/images/houst.jpg";
+import kansasImg from "../assets/images/kansasStadium.jpg";
+import filaImg from "../assets/images/Lincoln.jpg";
+import luminImg from "../assets/images/lumin.jpg";
+import gilleteImg from "../assets/images/Gillette_Stadium.jpg";
+import hardImg from "../assets/images/hardrock.jpg";
+import leviImg from "../assets/images/levis.jpg";
+import asteImg from "../assets/images/asteca.jpg";
+import BBVAImg from "../assets/images/estadio-bbva.jpg";
+import akronImg from "../assets/images/akron.jpg";
+import BCImg from "../assets/images/BCPlace.jpg";
+import BMOImg from "../assets/images/BMO.jpg";
 export const STADIUMS = [
   {
     id: 1,
     name: "MetLife Stadium",
+    image: metlifeImg,
     city: "Nueva Jersey",
     country: "USA",
     capacity: 82500,
     year: 2010,
     matches: 4,
     surface: "Césped natural",
-    description: "Estadio de los New York Giants y Jets. Sede de la Gran Final del Mundial 2026.",
+    description: "Estadio de los New York Giants Sy Jets. Sede de la Gran Final del Mundial 2026.",
     lat: 40.8135,
     lng: -74.0745,
   },
-  {
+   {
     id: 2,
     name: "AT&T Stadium",
+    image: atImg,
     city: "Dallas",
     country: "USA",
     capacity: 80000,
@@ -25,9 +43,11 @@ export const STADIUMS = [
     lat: 32.7480,
     lng: -97.0930,
   },
+  
   {
     id: 3,
     name: "Mercedes-Benz Stadium",
+    image: merImg,
     city: "Atlanta",
     country: "USA",
     capacity: 71000,
@@ -38,9 +58,11 @@ export const STADIUMS = [
     lat: 33.7553,
     lng: -84.4006,
   },
+ 
   {
     id: 4,
     name: "SoFi Stadium",
+    image: sofiImg,
     city: "Los Ángeles",
     country: "USA",
     capacity: 70000,
@@ -51,9 +73,11 @@ export const STADIUMS = [
     lat: 33.9535,
     lng: -118.3392,
   },
+   
   {
     id: 5,
     name: "NRG Stadium",
+    image: houstenImg,
     city: "Houston",
     country: "USA",
     capacity: 72220,
@@ -64,9 +88,11 @@ export const STADIUMS = [
     lat: 29.6847,
     lng: -95.4107,
   },
+ 
   {
     id: 6,
     name: "Arrowhead Stadium",
+    image: kansasImg,
     city: "Kansas City",
     country: "USA",
     capacity: 76416,
@@ -77,9 +103,11 @@ export const STADIUMS = [
     lat: 39.0489,
     lng: -94.4839,
   },
+ 
   {
     id: 7,
     name: "Lincoln Financial Field",
+    image: filaImg,
     city: "Filadelfia",
     country: "USA",
     capacity: 69176,
@@ -90,8 +118,10 @@ export const STADIUMS = [
     lat: 39.9008,
     lng: -75.1675,
   },
+    
   {
     id: 8,
+    image: luminImg,
     name: "Lumen Field",
     city: "Seattle",
     country: "USA",
@@ -103,9 +133,11 @@ export const STADIUMS = [
     lat: 47.5952,
     lng: -122.3316,
   },
+  
   {
     id: 9,
     name: "Gillette Stadium",
+    image: gilleteImg,
     city: "Boston",
     country: "USA",
     capacity: 65878,
@@ -116,9 +148,11 @@ export const STADIUMS = [
     lat: 42.0909,
     lng: -71.2643,
   },
+  
   {
     id: 10,
     name: "Hard Rock Stadium",
+    image: hardImg,
     city: "Miami",
     country: "USA",
     capacity: 64767,
@@ -129,9 +163,11 @@ export const STADIUMS = [
     lat: 25.9580,
     lng: -80.2389,
   },
+  
   {
     id: 11,
     name: "Levi's Stadium",
+    image: leviImg,
     city: "San Francisco",
     country: "USA",
     capacity: 68500,
@@ -142,9 +178,11 @@ export const STADIUMS = [
     lat: 37.4032,
     lng: -121.9698,
   },
+  
   {
     id: 12,
     name: "Estadio Azteca",
+    image: asteImg,
     city: "Ciudad de México",
     country: "México",
     capacity: 87523,
@@ -155,9 +193,11 @@ export const STADIUMS = [
     lat: 19.3029,
     lng: -99.1505,
   },
+  
   {
     id: 13,
     name: "Estadio BBVA",
+    image: BBVAImg,
     city: "Monterrey",
     country: "México",
     capacity: 53500,
@@ -168,9 +208,11 @@ export const STADIUMS = [
     lat: 25.6694,
     lng: -100.2436,
   },
+  
   {
     id: 14,
     name: "Estadio Akron",
+    image: akronImg,
     city: "Guadalajara",
     country: "México",
     capacity: 49850,
@@ -181,9 +223,11 @@ export const STADIUMS = [
     lat: 20.6854,
     lng: -103.4677,
   },
+  
   {
     id: 15,
     name: "BC Place",
+    image: BCImg,
     city: "Vancouver",
     country: "Canadá",
     capacity: 54500,
@@ -194,9 +238,11 @@ export const STADIUMS = [
     lat: 49.2767,
     lng: -123.1118,
   },
+  
   {
     id: 16,
     name: "BMO Field",
+    image: BMOImg,
     city: "Toronto",
     country: "Canadá",
     capacity: 45736,
@@ -206,7 +252,7 @@ export const STADIUMS = [
     description: "Estadio principal del Toronto FC, orgullo del fútbol canadiense.",
     lat: 43.6333,
     lng: -79.4189,
-  },
+  }, 
 ];
 
 export const MATCHES = [
