@@ -70,25 +70,41 @@ export default function StadiumDetailPage() {
         Volver a estadios
       </Button>
 
-      {/* Hero */}
-      <Box
-        sx={{
-          height: { xs: 160, md: 220 },
-          borderRadius: 3,
-          background: "linear-gradient(135deg, #0A2540 0%, #1a4a6c 50%, #0F3052 100%)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          position: "relative", mb: 3, overflow: "hidden",
-          border: "1px solid rgba(255,255,255,0.08)",
-        }}
-      >
-        <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} />
-        <Box sx={{ position: "absolute", top: 16, left: 16 }}>
-          <Chip
-            label={`${COUNTRY_FLAGS[stadium.country] || ""} ${stadium.country}`}
-            sx={{ bgcolor: "rgba(0,0,0,0.5)", color: "#fff", border: "1px solid rgba(255,255,255,0.15)" }}
-          />
-        </Box>
-      </Box>
+    <Box
+  sx={{
+    height: { xs: 160, md: 220 },
+    borderRadius: 3,
+    overflow: "hidden",
+    position: "relative",
+    mb: 3,
+    border: "1px solid rgba(255,255,255,0.08)",
+  }}
+>
+  {stadium.image ? (
+    <Box
+      component="img"
+      src={stadium.image}
+      alt={stadium.name}
+      sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  ) : (
+    <Box
+      sx={{
+        width: "100%", height: "100%",
+        background: "linear-gradient(135deg, #0A2540 0%, #1a4a6c 50%, #0F3052 100%)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} />
+    </Box>
+  )}
+  <Box sx={{ position: "absolute", top: 16, left: 16 }}>
+    <Chip
+      label={`${COUNTRY_FLAGS[stadium.country] || ""} ${stadium.country}`}
+      sx={{ bgcolor: "rgba(0,0,0,0.5)", color: "#fff", border: "1px solid rgba(255,255,255,0.15)" }}
+    />
+  </Box>
+</Box>
 
       {/* Title */}
       <Typography variant="h4" fontWeight={800} color="#fff" mb={0.5}>

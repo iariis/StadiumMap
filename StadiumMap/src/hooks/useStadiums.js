@@ -14,7 +14,6 @@ export function useFetch(fetchFn, deps = []) {
     setLoading(true);
     setError(null);
     try {
-      // Simula latencia de red
       await new Promise((r) => setTimeout(r, 300));
       const result = await fetchFn();
       setData(result);
@@ -35,7 +34,6 @@ export function useFetch(fetchFn, deps = []) {
 /**
  * Custom Hook: useStadiumCRUD
  * Gestiona operaciones CRUD sobre estadios usando localStorage.
- * Simula una API REST Flask en el frontend.
  */
 export function useStadiumCRUD(initialData) {
   const STORAGE_KEY = "stadiummap_stadiums";
@@ -43,7 +41,6 @@ export function useStadiumCRUD(initialData) {
   const getAll = () => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) return JSON.parse(stored);
-    // Primera vez: cargar datos iniciales
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
     return initialData;
   };

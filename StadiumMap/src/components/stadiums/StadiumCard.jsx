@@ -25,11 +25,15 @@ export default function StadiumCard({ stadium, onClick }) {
         <Box
           sx={{
             height: 110, position: "relative", overflow: "hidden",
-            background: `linear-gradient(135deg, #0A2540 0%, ${flagColor}33 100%)`,
-            display: "flex", alignItems: "center", justifyContent: "center",
+            
           }}
         >
-          <StadiumIcon sx={{ fontSize: 64, color: "rgba(255,255,255,0.08)" }} />
+          <Box
+      component="img"
+      src={stadium.image}
+      alt={stadium.name}
+      sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
           <Box sx={{ position: "absolute", top: 10, left: 12 }}>
             <Chip
               label={`${COUNTRY_FLAGS[stadium.country] || ""} ${stadium.country}`}
