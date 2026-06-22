@@ -268,9 +268,22 @@ export const MATCHES = [
 ];
 
 export const FLAGS = {
-  México: "🇲🇽", USA: "🇺🇸", Brasil: "🇧🇷", Argentina: "🇦🇷",
-  Canadá: "🇨🇦", Alemania: "🇩🇪", Japón: "🇯🇵", Francia: "🇫🇷",
-  Australia: "🇦🇺", España: "🇪🇸", "Corea del Sur": "🇰🇷",
-  Inglaterra: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", Senegal: "🇸🇳", Portugal: "🇵🇹",
-  Ghana: "🇬🇭", "Países Bajos": "🇳🇱", Ecuador: "🇪🇨", Irlanda: "🇮🇪",
+  México: "/flags/mx.png",
+  USA: "/flags/us.png",
+  Brasil: "/flags/br.png",
+  Argentina: "/flags/ar.png",
+  Canadá: "/flags/ca.png",
+  Alemania: "/flags/de.png",
+  Japón: "/flags/jp.png",
+  Francia: "/flags/fr.png",
+  Australia: "/flags/au.png",
+  España: "/flags/es.png",
+  "Corea del Sur": "/flags/kr.png",
+  Inglaterra: "/flags/gb-eng.png",
+  Senegal: "/flags/sn.png",
+  Portugal: "/flags/pt.png",
+  Ghana: "/flags/gh.png",
+  "Países Bajos": "/flags/nl.png",
+  Ecuador: "/flags/ec.png",
+  Irlanda: "/flags/ie.png",
 };

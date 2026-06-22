@@ -13,7 +13,28 @@ import StadiumIcon from "@mui/icons-material/Stadium";
 import { STADIUMS, MATCHES, FLAGS } from "../data/stadiums";
 import { useStadiumCRUD } from "../hooks/useStadiums";
 
-const COUNTRY_FLAGS = { USA: "🇺🇸", México: "🇲🇽", Canadá: "🇨🇦" };
+function FlagImage({ country, size = 24 }) {
+  const src = FLAGS[country];
+
+  if (!src) {
+    return null;
+  }
+
+  return (
+    <Box
+      component="img"
+      src={src}
+      alt={country}
+      sx={{
+        width: size,
+        height: Math.round(size * 0.68),
+        objectFit: "cover",
+        borderRadius: "3px",
+        boxShadow: "0 0 0 1px rgba(255,255,255,0.22)",
+      }}
+    />
+  );
+}
 
 export default function StadiumDetailPage() {
   const { id } = useParams();
@@ -100,7 +121,7 @@ export default function StadiumDetailPage() {
   )}
   <Box sx={{ position: "absolute", top: 16, left: 16 }}>
     <Chip
-      label={`${COUNTRY_FLAGS[stadium.country] || ""} ${stadium.country}`}
+      label={stadium.country}
       sx={{ bgcolor: "rgba(0,0,0,0.5)", color: "#fff", border: "1px solid rgba(255,255,255,0.15)" }}
     />
   </Box>
@@ -166,9 +187,13 @@ export default function StadiumDetailPage() {
                   display: "flex", alignItems: "center", justifyContent: "space-between",
                 }}
               >
-                <Typography variant="body2" color="#fff">
-                  {FLAGS[m.home] || ""} {m.home} <span style={{ color: "#D4AF37" }}>vs</span> {m.away} {FLAGS[m.away] || ""}
-                </Typography>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 0.8, color: "#fff", fontSize: 14 }}>
+                  <FlagImage country={m.home} />
+                  <span>{m.home}</span>
+                  <span style={{ color: "#D4AF37" }}>vs</span>
+                  <span>{m.away}</span>
+                  <FlagImage country={m.away} />
+                </Box>
                 <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                   <Chip label={m.phase} size="small"
                     sx={{ bgcolor: "rgba(0,174,239,0.15)", color: "#00AEEF", fontSize: 10 }} />

@@ -4,8 +4,34 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import StadiumIcon from "@mui/icons-material/Stadium";
 
-const COUNTRY_FLAGS = { USA: "🇺🇸", México: "🇲🇽", Canadá: "🇨🇦" };
+export const FLAGS = {
+  México: "/flags/mx.png",
+  USA: "/flags/us.png",
+  Canadá: "/flags/ca.png"
+};
+
 const COUNTRY_COLORS = { USA: "#B22234", México: "#006847", Canadá: "#FF0000" };
+
+function CountryFlag({ country }) {
+  const src = FLAGS[country];
+
+  if (!src) return null;
+
+  return (
+    <Box
+      component="img"
+      src={src}
+      alt={country}
+      sx={{
+        width: 20,
+        height: 14,
+        objectFit: "cover",
+        borderRadius: "2px",
+        boxShadow: "0 0 0 1px rgba(255,255,255,0.22)",
+      }}
+    />
+  );
+}
 
 export default function StadiumCard({ stadium, onClick }) {
   const flagColor = COUNTRY_COLORS[stadium.country] || "#00AEEF";
@@ -36,7 +62,12 @@ export default function StadiumCard({ stadium, onClick }) {
     />
           <Box sx={{ position: "absolute", top: 10, left: 12 }}>
             <Chip
-              label={`${COUNTRY_FLAGS[stadium.country] || ""} ${stadium.country}`}
+              label={
+                <Box sx={{ display: "flex", alignItems: "center", gap: 0.7 }}>
+                  <CountryFlag country={stadium.country} />
+                  <span>{stadium.country}</span>
+                </Box>
+              }
               size="small"
               sx={{
                 bgcolor: "rgba(0,0,0,0.5)", color: "#fff", fontSize: 11,

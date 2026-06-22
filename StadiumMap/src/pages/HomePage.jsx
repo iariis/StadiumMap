@@ -8,6 +8,29 @@ import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import PlaceIcon from "@mui/icons-material/Place";
 import { MATCHES, STADIUMS, FLAGS } from "../data/stadiums";
 
+function FlagImage({ country, size = 34 }) {
+  const src = FLAGS[country];
+
+  if (!src) {
+    return <Typography fontSize={size}>🏳️</Typography>;
+  }
+
+  return (
+    <Box
+      component="img"
+      src={src}
+      alt={country}
+      sx={{
+        width: size,
+        height: Math.round(size * 0.68),
+        objectFit: "cover",
+        borderRadius: "3px",
+        boxShadow: "0 0 0 1px rgba(255,255,255,0.22)",
+      }}
+    />
+  );
+}
+
 export default function HomePage() {
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
@@ -98,7 +121,9 @@ export default function HomePage() {
                       {/* Teams */}
                       <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 2 }}>
                         <Box sx={{ textAlign: "center", flex: 1 }}>
-                          <Typography fontSize={32}>{FLAGS[match.home] || "🏳️"}</Typography>
+                          <Box sx={{ display: "flex", justifyContent: "center", height: 26, alignItems: "center" }}>
+                            <FlagImage country={match.home} />
+                          </Box>
                           <Typography variant="caption" color="rgba(255,255,255,0.8)" fontWeight={500} display="block" mt={0.5}>
                             {match.home}
                           </Typography>
@@ -110,7 +135,9 @@ export default function HomePage() {
                           </Typography>
                         </Box>
                         <Box sx={{ textAlign: "center", flex: 1 }}>
-                          <Typography fontSize={32}>{FLAGS[match.away] || "🏳️"}</Typography>
+                          <Box sx={{ display: "flex", justifyContent: "center", height: 26, alignItems: "center" }}>
+                            <FlagImage country={match.away} />
+                          </Box>
                           <Typography variant="caption" color="rgba(255,255,255,0.8)" fontWeight={500} display="block" mt={0.5}>
                             {match.away}
                           </Typography>
