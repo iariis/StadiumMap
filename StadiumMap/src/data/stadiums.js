@@ -28,6 +28,7 @@ export const STADIUMS = [
     description: "Estadio de los New York Giants Sy Jets. Sede de la Gran Final del Mundial 2026.",
     lat: 40.8135,
     lng: -74.0745,
+    embed3d: "https://sketchfab.com/models/cfc0b282b3ec466c841087d83018a168/embed",
   },
    {
     id: 2,
@@ -42,6 +43,7 @@ export const STADIUMS = [
     description: "Hogar de los Dallas Cowboys, conocido como 'America's Stadium'.",
     lat: 32.7480,
     lng: -97.0930,
+    embed3d: "https://sketchfab.com/models/2f5f9e70d46d4b0aa1bc9cbe98563161/embed",
   },
   
   {
@@ -57,6 +59,7 @@ export const STADIUMS = [
     description: "Estadio multifuncional de Atlanta con techo retráctil único.",
     lat: 33.7553,
     lng: -84.4006,
+    embed3d: "https://sketchfab.com/models/4f176a0f063743ed98fe7303498608bb/embed",
   },
  
   {
@@ -72,6 +75,7 @@ export const STADIUMS = [
     description: "El estadio más caro jamás construido, sede de Rams y Chargers.",
     lat: 33.9535,
     lng: -118.3392,
+    embed3d: "https://sketchfab.com/models/6df1bdc877344397801400fe0c5269be/embed",
   },
    
   {
@@ -87,6 +91,7 @@ export const STADIUMS = [
     description: "Primer estadio NFL con techo retráctil en Norteamérica.",
     lat: 29.6847,
     lng: -95.4107,
+    embed3d: "https://sketchfab.com/models/b675e828317b4c3fb4e14526a4e87e8d/embed",
   },
  
   {
@@ -102,6 +107,7 @@ export const STADIUMS = [
     description: "Casa de los Kansas City Chiefs, reconocido por su ruidosa afición.",
     lat: 39.0489,
     lng: -94.4839,
+    embed3d: "https://sketchfab.com/models/8a4343ba53c74078808cadc937cdb20e/embed",
   },
  
   {
@@ -117,6 +123,7 @@ export const STADIUMS = [
     description: "Hogar de los Philadelphia Eagles en el corazón de la ciudad.",
     lat: 39.9008,
     lng: -75.1675,
+    embed3d: "https://sketchfab.com/models/97b99892fd0b44e98bb946b78b49cfc3/embed",
   },
     
   {
@@ -132,6 +139,7 @@ export const STADIUMS = [
     description: "Estadio de los Seahawks con una de las aficiones más ruidosas del mundo.",
     lat: 47.5952,
     lng: -122.3316,
+    embed3d: "https://sketchfab.com/models/403a31928a024f4bba49d881f3e60bdf/embed",
   },
   
   {
@@ -147,6 +155,7 @@ export const STADIUMS = [
     description: "Sede de los New England Patriots, referente del fútbol americano.",
     lat: 42.0909,
     lng: -71.2643,
+    embed3d: "https://sketchfab.com/models/2148e49ae6914c88adcae710996f294a/embed",
   },
   
   {
@@ -162,6 +171,7 @@ export const STADIUMS = [
     description: "Ícono deportivo de Miami, renovado para el Mundial 2026.",
     lat: 25.9580,
     lng: -80.2389,
+    embed3d: "https://sketchfab.com/models/af2f7e013af44bafbe2043050b9d292a/embed",
   },
   
   {
@@ -177,6 +187,7 @@ export const STADIUMS = [
     description: "Estadio de los San Francisco 49ers en Silicon Valley.",
     lat: 37.4032,
     lng: -121.9698,
+    embed3d: "https://sketchfab.com/models/82a444fb65764299860149efd323ff0e/embed",
   },
   
   {
@@ -192,6 +203,7 @@ export const STADIUMS = [
     description: "El estadio más grande de México y uno de los más icónicos del mundo.",
     lat: 19.3029,
     lng: -99.1505,
+    embed3d: "https://sketchfab.com/models/83ca580566054b1b9d780289f4372d68/embed",
   },
   
   {
@@ -207,6 +219,7 @@ export const STADIUMS = [
     description: "Moderno estadio del Club de Fútbol Monterrey con diseño de vanguardia.",
     lat: 25.6694,
     lng: -100.2436,
+    embed3d: "https://sketchfab.com/models/7ae5e6c6393947948776c1314fbbeefd/embed",
   },
   
   {
@@ -222,6 +235,7 @@ export const STADIUMS = [
     description: "Casa de las Chivas Rayadas del Guadalajara, orgullo tapatío.",
     lat: 20.6854,
     lng: -103.4677,
+    embed3d: "https://sketchfab.com/models/09002d3206d44f15974fc7133e543726/embed",
   },
   
   {
@@ -237,6 +251,7 @@ export const STADIUMS = [
     description: "El estadio cubierto más grande de Canadá en el corazón de Vancouver.",
     lat: 49.2767,
     lng: -123.1118,
+    embed3d: "https://sketchfab.com/models/fb65bf95e1a04f0791d410b2361fe16e/embed",
   },
   
   {
@@ -252,7 +267,7 @@ export const STADIUMS = [
     description: "Estadio principal del Toronto FC, orgullo del fútbol canadiense.",
     lat: 43.6333,
     lng: -79.4189,
-  }, 
+  },
 ];
 
 export const MATCHES = [

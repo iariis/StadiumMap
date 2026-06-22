@@ -93,7 +93,7 @@ export default function StadiumDetailPage() {
 
     <Box
   sx={{
-    height: { xs: 160, md: 220 },
+    height: { xs: 260, md: 430 },
     borderRadius: 3,
     overflow: "hidden",
     position: "relative",
@@ -116,9 +116,26 @@ export default function StadiumDetailPage() {
         display: "flex", alignItems: "center", justifyContent: "center",
       }}
     >
-      <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} />
-    </Box>
+        {stadium.embed3d ? (
+          <Box
+            component="iframe"
+            title={`${stadium.name} 3D`}
+            src={stadium.embed3d}
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            allowFullScreen
+            sx={{
+              width: "100%",
+              height: "100%",
+              border: 0,
+              display: "block",
+            }}
+          />
+        ) : (
+        <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} /> 
+    
   )}
+    </Box>
+        )}
   <Box sx={{ position: "absolute", top: 16, left: 16 }}>
     <Chip
       label={stadium.country}
