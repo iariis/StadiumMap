@@ -1,27 +1,19 @@
-from app import db, bcrypt
+from app import bcrypt, db
 from app.models.base_model import BaseModel
 
 
 class User(db.Model, BaseModel):
-    """
-    Modelo Usuario — hereda de BaseModel.
-    Gestión de autenticación con roles.
-    """
-
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column("name", db.String(100), nullable=False)
     _email = db.Column("email", db.String(120), unique=True, nullable=False)
     _password_hash = db.Column("password_hash", db.String(255), nullable=False)
-    _role = db.Column("role", db.String(20), default="user")
-    created_at = db.Column(db.DateTime, default=db.func.now())
-    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
+    _role = db.Column("role", db.String(20), default="user", nullable=False)
 
     ROLES = ["admin", "user"]
 
     def __init__(self, name, email, password, role="user"):
-        super().__init__()
         self.name = name
         self.email = email
         self.password = password
@@ -44,7 +36,7 @@ class User(db.Model, BaseModel):
     @email.setter
     def email(self, value):
         if not value or "@" not in value:
-            raise ValueError("Email inválido")
+            raise ValueError("Email invalido")
         self._email = value.lower().strip()
 
     @property
@@ -59,21 +51,20 @@ class User(db.Model, BaseModel):
 
     @property
     def password(self):
-        raise AttributeError("La contraseña no es accesible directamente")
+        raise AttributeError("La contrasenia no es accesible directamente")
 
     @password.setter
     def password(self, plain_text):
-        if len(plain_text) < 6:
-            raise ValueError("La contraseña debe tener al menos 6 caracteres")
+        if not plain_text or len(plain_text) < 6:
+            raise ValueError("La contrasenia debe tener al menos 6 caracteres")
         self._password_hash = bcrypt.generate_password_hash(plain_text).decode("utf-8")
 
     def check_password(self, plain_text):
         return bcrypt.check_password_hash(self._password_hash, plain_text)
 
     def is_admin(self):
-        return self._role == "admin"
+        return self.role == "admin"
 
-    # Polimorfismo: implementa to_dict()
     def to_dict(self):
         return {
             "id": self.id,
@@ -81,4 +72,5 @@ class User(db.Model, BaseModel):
             "email": self.email,
             "role": self.role,
             "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }

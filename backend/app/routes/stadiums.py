@@ -15,8 +15,8 @@ def require_admin():
 
 
 # GET /api/stadiums — Listar todos
+@stadiums_bp.route("", methods=["GET"])
 @stadiums_bp.route("/", methods=["GET"])
-@jwt_required()
 def get_stadiums():
     country = request.args.get("country")
     search = request.args.get("search", "")
@@ -38,13 +38,13 @@ def get_stadiums():
 
 # GET /api/stadiums/:id — Obtener uno
 @stadiums_bp.route("/<int:stadium_id>", methods=["GET"])
-@jwt_required()
 def get_stadium(stadium_id):
     stadium = Stadium.query.get_or_404(stadium_id, description="Estadio no encontrado")
     return jsonify(stadium.to_dict()), 200
 
 
 # POST /api/stadiums — Crear (solo admin)
+@stadiums_bp.route("", methods=["POST"])
 @stadiums_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_stadium():

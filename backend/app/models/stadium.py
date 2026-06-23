@@ -3,28 +3,31 @@ from app.models.base_model import BaseModel
 
 
 class Stadium(db.Model, BaseModel):
-    """
-    Modelo Estadio — aplica Herencia de BaseModel.
-    Módulo asignado: CRUD completo de Estadios.
-    """
-
     __tablename__ = "stadiums"
 
-    # Atributos (Encapsulamiento via SQLAlchemy)
     id = db.Column(db.Integer, primary_key=True)
     _name = db.Column("name", db.String(120), nullable=False)
     _city = db.Column("city", db.String(80), nullable=False)
     _country = db.Column("country", db.String(50), nullable=False)
     _capacity = db.Column("capacity", db.Integer, nullable=False)
     _year = db.Column("year", db.Integer, nullable=False)
-    _matches = db.Column("matches", db.Integer, default=0)
-    _surface = db.Column("surface", db.String(40), default="Césped natural")
-    _description = db.Column("description", db.Text, default="")
-    created_at = db.Column(db.DateTime, default=db.func.now())
-    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
+    _matches = db.Column("matches", db.Integer, default=0, nullable=False)
+    _surface = db.Column("surface", db.String(40), default="C\u00e9sped natural", nullable=False)
+    _description = db.Column("description", db.Text, default="", nullable=False)
 
-    def __init__(self, name, city, country, capacity, year, matches=0, surface="Césped natural", description=""):
-        super().__init__()
+    COUNTRIES = ["USA", "M\u00e9xico", "Canad\u00e1"]
+
+    def __init__(
+        self,
+        name,
+        city,
+        country,
+        capacity,
+        year,
+        matches=0,
+        surface="C\u00e9sped natural",
+        description="",
+    ):
         self.name = name
         self.city = city
         self.country = country
@@ -34,7 +37,6 @@ class Stadium(db.Model, BaseModel):
         self.surface = surface
         self.description = description
 
-    # --- Properties (Encapsulamiento) ---
     @property
     def name(self):
         return self._name
@@ -42,7 +44,7 @@ class Stadium(db.Model, BaseModel):
     @name.setter
     def name(self, value):
         if not value or not value.strip():
-            raise ValueError("El nombre no puede estar vacío")
+            raise ValueError("El nombre no puede estar vacio")
         self._name = value.strip()
 
     @property
@@ -52,7 +54,7 @@ class Stadium(db.Model, BaseModel):
     @city.setter
     def city(self, value):
         if not value or not value.strip():
-            raise ValueError("La ciudad no puede estar vacía")
+            raise ValueError("La ciudad no puede estar vacia")
         self._city = value.strip()
 
     @property
@@ -61,9 +63,8 @@ class Stadium(db.Model, BaseModel):
 
     @country.setter
     def country(self, value):
-        allowed = ["USA", "México", "Canadá"]
-        if value not in allowed:
-            raise ValueError(f"País debe ser uno de: {allowed}")
+        if value not in self.COUNTRIES:
+            raise ValueError(f"Pais debe ser uno de: {self.COUNTRIES}")
         self._country = value
 
     @property
@@ -72,8 +73,9 @@ class Stadium(db.Model, BaseModel):
 
     @capacity.setter
     def capacity(self, value):
-        if not isinstance(value, int) or value < 1000:
-            raise ValueError("Capacidad debe ser un entero mayor a 1000")
+        value = int(value)
+        if value < 1000:
+            raise ValueError("Capacidad debe ser mayor a 1000")
         self._capacity = value
 
     @property
@@ -82,8 +84,9 @@ class Stadium(db.Model, BaseModel):
 
     @year.setter
     def year(self, value):
-        if not isinstance(value, int) or value < 1900:
-            raise ValueError("Año inválido")
+        value = int(value)
+        if value < 1900:
+            raise ValueError("Anio invalido")
         self._year = value
 
     @property
@@ -92,7 +95,7 @@ class Stadium(db.Model, BaseModel):
 
     @matches.setter
     def matches(self, value):
-        self._matches = max(0, int(value))
+        self._matches = max(0, int(value or 0))
 
     @property
     def surface(self):
@@ -100,7 +103,7 @@ class Stadium(db.Model, BaseModel):
 
     @surface.setter
     def surface(self, value):
-        self._surface = value
+        self._surface = value or "C\u00e9sped natural"
 
     @property
     def description(self):
@@ -110,7 +113,6 @@ class Stadium(db.Model, BaseModel):
     def description(self, value):
         self._description = value or ""
 
-    # --- Polimorfismo: implementa to_dict() de BaseModel ---
     def to_dict(self):
         return {
             "id": self.id,
@@ -127,7 +129,6 @@ class Stadium(db.Model, BaseModel):
         }
 
     def update_from_dict(self, data):
-        """Actualiza campos desde un dict (usado en PUT)."""
         fields = ["name", "city", "country", "capacity", "year", "matches", "surface", "description"]
         for field in fields:
             if field in data:

@@ -91,58 +91,45 @@ export default function StadiumDetailPage() {
         Volver a estadios
       </Button>
 
-    <Box
-  sx={{
-    height: { xs: 260, md: 430 },
-    borderRadius: 3,
-    overflow: "hidden",
-    position: "relative",
-    mb: 3,
-    border: "1px solid rgba(255,255,255,0.08)",
-  }}
->
-  {stadium.image ? (
-    <Box
-      component="img"
-      src={stadium.image}
-      alt={stadium.name}
-      sx={{ width: "100%", height: "100%", objectFit: "cover" }}
-    />
-  ) : (
-    <Box
-      sx={{
-        width: "100%", height: "100%",
-        background: "linear-gradient(135deg, #0A2540 0%, #1a4a6c 50%, #0F3052 100%)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}
-    >
-        {stadium.embed3d ? (
+      <Box
+        sx={{
+          height: { xs: 260, md: 430 },
+          borderRadius: 3,
+          overflow: "hidden",
+          position: "relative",
+          mb: 3,
+          border: "1px solid rgba(255,255,255,0.08)",
+          bgcolor: "rgba(15,48,82,0.7)",
+        }}
+      >
+        {stadium.image ? (
           <Box
-            component="iframe"
-            title={`${stadium.name} 3D`}
-            src={stadium.embed3d}
-            allow="autoplay; fullscreen; xr-spatial-tracking"
-            allowFullScreen
+            component="img"
+            src={stadium.image}
+            alt={stadium.name}
+            sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : (
+          <Box
             sx={{
               width: "100%",
               height: "100%",
-              border: 0,
-              display: "block",
+              background: "linear-gradient(135deg, #0A2540 0%, #1a4a6c 50%, #0F3052 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
-        ) : (
-        <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} /> 
-    
-  )}
-    </Box>
+          >
+            <StadiumIcon sx={{ fontSize: { xs: 80, md: 120 }, color: "rgba(255,255,255,0.06)" }} />
+          </Box>
         )}
-  <Box sx={{ position: "absolute", top: 16, left: 16 }}>
-    <Chip
-      label={stadium.country}
-      sx={{ bgcolor: "rgba(0,0,0,0.5)", color: "#fff", border: "1px solid rgba(255,255,255,0.15)" }}
-    />
-  </Box>
-</Box>
+        <Box sx={{ position: "absolute", top: 16, left: 16 }}>
+          <Chip
+            label={stadium.country}
+            sx={{ bgcolor: "rgba(0,0,0,0.5)", color: "#fff", border: "1px solid rgba(255,255,255,0.15)" }}
+          />
+        </Box>
+      </Box>
 
       {/* Title */}
       <Typography variant="h4" fontWeight={800} color="#fff" mb={0.5}>
@@ -186,6 +173,54 @@ export default function StadiumDetailPage() {
           </Typography>
         </Paper>
       )}
+
+      <Box mb={3}>
+        <Typography variant="h6" fontWeight={700} color="#fff" mb={1.5}>
+          Vista 3D
+        </Typography>
+        <Paper
+          elevation={0}
+          sx={{
+            height: { xs: 320, md: 520 },
+            overflow: "hidden",
+            bgcolor: "rgba(15,48,82,0.7)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: 3,
+          }}
+        >
+          {stadium.embed3d ? (
+            <Box
+              component="iframe"
+              title={`${stadium.name} 3D`}
+              src={stadium.embed3d}
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              allowFullScreen
+              sx={{
+                width: "100%",
+                height: "100%",
+                border: 0,
+                display: "block",
+              }}
+            />
+          ) : (
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                px: 2,
+                textAlign: "center",
+              }}
+            >
+              <Typography color="rgba(255,255,255,0.5)">
+                Vista 3D no disponible para este estadio.
+              </Typography>
+            </Box>
+          )}
+        </Paper>
+      </Box>
 
       {/* Matches */}
       {stadiumMatches.length > 0 && (

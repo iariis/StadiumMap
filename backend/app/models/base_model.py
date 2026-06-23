@@ -1,34 +1,17 @@
-# ============================================================
-# backend/app/models/base_model.py  —  Clase Base (Abstracción + POO)
-# ============================================================
+from app import db
 
-from abc import ABC, abstractmethod
-from datetime import datetime
 
-class BaseModel(ABC):
+class BaseModel:
     """
-    Clase base abstracta que aplica los principios de POO:
-    - Abstracción: define la interfaz común para todos los modelos
-    - Encapsulamiento: atributos privados con propiedades
-    - Polimorfismo: to_dict() es implementado por cada subclase
+    Mixin base para modelos SQLAlchemy.
+    Aporta timestamps comunes y obliga a cada modelo a implementar to_dict().
     """
 
-    def __init__(self):
-        self._created_at = datetime.utcnow()
-        self._updated_at = datetime.utcnow()
+    created_at = db.Column(db.DateTime, default=db.func.now(), nullable=False)
+    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now(), nullable=False)
 
-    @property
-    def created_at(self):
-        return self._created_at
-
-    @property
-    def updated_at(self):
-        return self._updated_at
-
-    @abstractmethod
     def to_dict(self):
-        """Cada modelo debe implementar su propia serialización."""
-        pass
+        raise NotImplementedError("Cada modelo debe implementar su propia serializacion.")
 
     def __repr__(self):
         return f"<{self.__class__.__name__} id={getattr(self, 'id', None)}>"

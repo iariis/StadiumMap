@@ -1,5 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 
+const API_URL = "http://localhost:5000/api/stadiums/";
+
+function mergeStadiumAssets(stadiums, assetsSource) {
+  return stadiums.map((stadium) => {
+    const assets = assetsSource.find((item) => item.id === stadium.id) || {};
+    return {
+      ...stadium,
+      image: assets.image,
+      embed3d: assets.embed3d,
+    };
+  });
+}
+
 /**
  * Custom Hook: useFetch
  * Simula consumo de API REST usando localStorage como base de datos.
@@ -47,9 +60,36 @@ export function useStadiumCRUD(initialData) {
 
   const [stadiums, setStadiums] = useState(getAll);
 
+  useEffect(() => {
+    let active = true;
+
+    fetch(API_URL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("No se pudieron cargar estadios desde Flask");
+        }
+        return response.json();
+      })
+      .then((apiStadiums) => {
+        if (active) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(apiStadiums));
+          setStadiums(mergeStadiumAssets(apiStadiums, initialData));
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setStadiums(mergeStadiumAssets(getAll(), initialData));
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [initialData]);
+
   const save = (list) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-    setStadiums(list);
+    setStadiums(mergeStadiumAssets(list, initialData));
   };
 
   const create = (stadium) => {
@@ -69,7 +109,7 @@ export function useStadiumCRUD(initialData) {
     save(filtered);
   };
 
-  const getById = (id) => getAll().find((s) => s.id === id);
+  const getById = (id) => stadiums.find((s) => s.id === id);
 
-  return { stadiums, create, update, remove, getById, refetch: () => setStadiums(getAll()) };
+  return { stadiums, create, update, remove, getById, refetch: () => setStadiums(mergeStadiumAssets(getAll(), initialData)) };
 }
