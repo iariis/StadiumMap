@@ -13,11 +13,7 @@ function mergeStadiumAssets(stadiums, assetsSource) {
   });
 }
 
-/**
- * Custom Hook: useFetch
- * Simula consumo de API REST usando localStorage como base de datos.
- * En producción, reemplazar fetchFn por llamadas reales a Flask.
- */
+
 export function useFetch(fetchFn, deps = []) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,7 +31,9 @@ export function useFetch(fetchFn, deps = []) {
     } finally {
       setLoading(false);
     }
-  }, deps); // eslint-disable-line
+  }, deps); 
+
+ 
 
   useEffect(() => {
     execute();
@@ -44,10 +42,7 @@ export function useFetch(fetchFn, deps = []) {
   return { data, loading, error, refetch: execute };
 }
 
-/**
- * Custom Hook: useStadiumCRUD
- * Gestiona operaciones CRUD sobre estadios usando localStorage.
- */
+
 export function useStadiumCRUD(initialData) {
   const STORAGE_KEY = "stadiummap_stadiums";
 
